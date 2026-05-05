@@ -19,7 +19,7 @@ Create a `.env` file in the project root directory:
 FLOCI_AUTH_PRESIGN_SECRET=your_secret_key_here
 ```
 
-1. Start the Infrastructure
+2. Start the Infrastructure
 
 Spin up the Floci S3 emulator using Docker Compose:
 
@@ -28,7 +28,7 @@ cd document-upload-floci
 sudo docker compose up -d
 ```
 
-1. Start the Backend
+3. Start the Backend
 
 Launch the Spring Boot application:
 
@@ -39,7 +39,7 @@ mvn spring-boot:run
 
 Or run from your IDE.
 
-1. Start the Frontend
+4. Start the Frontend
 
 Install dependencies and start the Angular development server:
 
