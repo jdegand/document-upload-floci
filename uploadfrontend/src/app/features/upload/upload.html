@@ -1,0 +1,28 @@
+<div class="upload-container">
+  <h1>HR Policy Document Upload</h1>
+
+  <form (ngSubmit)="onSubmit()" class="upload-form">
+    <div class="form-group">
+      <label for="title">Policy Title</label>
+      <input id="title" type="text" [(ngModel)]="title" name="title" required placeholder="e.g. Leave Policy 2025" />
+    </div>
+
+    <div class="form-group">
+      <label for="department">Department</label>
+      <input id="department" type="text" [(ngModel)]="department" name="department" required placeholder="e.g. HR" />
+    </div>
+
+    <div class="form-group">
+      <label for="file">Select Document</label>
+      <input id="file" type="file" (change)="onFileSelected($event)" accept=".pdf,.doc,.docx" required />
+    </div>
+
+    <button type="submit">
+      Upload
+    </button>
+
+    @if(message) {
+      <p class="message">{{ message }}</p>
+    }
+  </form>
+</div>

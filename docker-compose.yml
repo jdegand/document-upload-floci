@@ -1,0 +1,28 @@
+services:
+  floci:
+    image: floci/floci:latest
+    container_name: floci
+    ports:
+      - "127.0.0.1:4566:4566"
+    environment:
+      FLOCI_SERVICES_S3_ENABLED: "true"
+      FLOCI_SERVICES_S3_DEFAULT_PRESIGN_EXPIRY_SECONDS: "300"
+      FLOCI_AUTH_PRESIGN_SECRET: "${FLOCI_PRESIGN_SECRET:-dev-only-secret}"
+    networks:
+      - floci
+
+  floci-init-bucket:
+    image: amazon/aws-cli:latest
+    container_name: floci_initializer
+    environment:
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_DEFAULT_REGION=us-east-1
+    entrypoint: /bin/sh -c
+    command: >
+      "aws --endpoint-url=http://floci:4566 s3 mb s3://hr-policy-docs"    depends_on:
+      - floci
+    networks:
+      - floci
+networks:
+  floci:

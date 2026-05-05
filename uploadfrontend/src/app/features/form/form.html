@@ -1,0 +1,44 @@
+<div class="upload-container">
+  <h1>HR Policy Document Upload</h1>
+  <form class="upload-form" [formRoot]="documentForm">
+    
+    <!-- Title Field -->
+    <div class="form-group">
+      <label for="title">Policy Title</label>
+      <input id="title" type="text" [formField]="documentForm.title" placeholder="e.g. Leave Policy 2025" />
+      @if (documentForm.title().touched() && documentForm.title().invalid()) {
+        <p class="error">Title is required.</p>
+      }
+    </div>
+
+    <!-- Department Field -->
+    <div class="form-group">
+      <label for="department">Department</label>
+      <input id="department" type="text" [formField]="documentForm.department" placeholder="e.g. HR" />
+      @if (documentForm.department().touched() && documentForm.department().invalid()) {
+        <p class="error">Department is required.</p>
+      }
+    </div>
+
+    <!-- File Field -->
+    <div class="form-group">
+      <label for="file">Select Document</label>
+      <input #fileInput id="file" type="file" accept=".pdf,.doc,.docx" (change)="onFileSelected($event)" />
+      @if (documentForm.file().value()) {
+        <p>Selected: {{ documentForm.file().value()?.name }}</p>
+      }
+      @if (documentForm.file().touched() && documentForm.file().invalid()) {
+        <p class="error">File upload is required.</p>
+      }
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" [disabled]="documentForm().submitting() || !documentForm().valid()">
+      @if (documentForm().submitting()) {
+        Uploading...
+      } @else {
+        Upload
+      }
+    </button>
+  </form>
+</div>
