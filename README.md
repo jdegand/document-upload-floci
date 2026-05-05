@@ -13,7 +13,7 @@ A document (`.pdf`, `.doc`, `.docx`) upload service using Floci (AWS emulator) a
 
 1. Configure Environment Variables
 
-Create a .env file in the project root directory:
+Create a `.env` file in the project root directory:
 
 ```bash
 FLOCI_AUTH_PRESIGN_SECRET=your_secret_key_here
@@ -59,7 +59,7 @@ npm start
 http://localhost:4566/hr-policy-docs/
 ```
 
-Add the key after the slash to see the uploaded file's contents.
+Add the key to the URL to view the uploaded file's contents.
 
 ## Configuration Alternatives
 
