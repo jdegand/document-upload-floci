@@ -5,7 +5,7 @@ A document (`.pdf`, `.doc`, `.docx`) upload service using Floci (AWS emulator) a
 ## Prerequisites
 
 - Java 25+ and Maven
-- Node.js and npm
+- Node.js and NPM
 - Docker and Docker Compose
 - AWS CLI (optional, for manual bucket management)
 
