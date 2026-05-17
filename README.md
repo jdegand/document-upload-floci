@@ -13,41 +13,41 @@ A document (`.pdf`, `.doc`, `.docx`) upload service using Floci (AWS emulator) a
 
 1. Configure Environment Variables
 
-Create a `.env` file in the project root directory:
+        Create a `.env` file in the project root directory:
 
-```bash
-FLOCI_AUTH_PRESIGN_SECRET=your_secret_key_here
-```
+        ```bash
+        FLOCI_AUTH_PRESIGN_SECRET=your_secret_key_here
+        ```
 
-2. Start the Infrastructure
+1. Start the Infrastructure
 
-Spin up the Floci S3 emulator using Docker Compose:
+        Spin up the Floci S3 emulator using Docker Compose:
 
-```bash
-cd document-upload-floci
-sudo docker compose up -d
-```
+        ```bash
+        cd document-upload-floci
+        sudo docker compose up -d
+        ```
 
-3. Start the Backend
+1. Start the Backend
 
-Launch the Spring Boot application:
+        Launch the Spring Boot application:
 
-```bash
-cd uploadbackend
-mvn spring-boot:run
-```
+        ```bash
+        cd uploadbackend
+        mvn spring-boot:run
+        ```
 
-Or run from your IDE.
+        Or run from your IDE.
 
-4. Start the Frontend
+1. Start the Frontend
 
-Install dependencies and start the Angular development server:
+        Install dependencies and start the Angular development server:
 
-```bash
-cd uploadfrontend
-npm install
-npm start
-```
+        ```bash
+        cd uploadfrontend
+        npm install
+        npm start
+        ```
 
 ## Usage
 
@@ -55,11 +55,11 @@ npm start
 1. Fill out the signal-based upload form and submit your document.
 1. Verify the file is saved in the local bucket by visiting:
 
-```bash
-http://localhost:4566/hr-policy-docs/
-```
+        ```bash
+        http://localhost:4566/hr-policy-docs/
+        ```
 
-Add the key to the URL to view the uploaded file's contents.
+        Add the key to the URL to view the uploaded file's contents.
 
 ## Configuration Alternatives
 
@@ -67,23 +67,23 @@ Add the key to the URL to view the uploaded file's contents.
 
 If you have the AWS CLI installed locally, you can remove it from the Docker container and manually create the bucket:
 
-```bash
-aws --endpoint-url=http://localhost:4566 s3 mb s3://hr-policy-docs
-```
+        ```bash
+        aws --endpoint-url=http://localhost:4566 s3 mb s3://hr-policy-docs
+        ```
 
 ### Automate Bucket Creation
 
 To eliminate manual setup, initialize the bucket automatically inside the Spring Boot application using a CommandLineRunner bean:
 
-```java
-@Bean
-CommandLineRunner initBucket(S3Client s3Client) {
-    return args -> {
-        try {
-            s3Client.createBucket(b -> b.bucket("hr-policy-docs"));
-        } catch (S3Exception e) {
-            // Bucket may already exist
+        ```java
+        @Bean
+        CommandLineRunner initBucket(S3Client s3Client) {
+            return args -> {
+                try {
+                    s3Client.createBucket(b -> b.bucket("hr-policy-docs"));
+                } catch (S3Exception e) {
+                    // Bucket may already exist
+                }
+            };
         }
-    };
-}
-```
+        ```
